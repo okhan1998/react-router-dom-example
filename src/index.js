@@ -40,6 +40,7 @@ let contents = [
 function Topic() {
   let params = useParams();
   let topic_id = params.topic_id;
+  console.log(params);
   let selected_topic = {
     title:'Sorry',
     description: 'Not Found'
@@ -64,7 +65,7 @@ function Topic() {
 function Topics(){
   let lis = [];
   for(let i = 0; i<contents.length; i++){
-    lis.push(<li><NavLink to={'/topics/'+contents[i].id}>{contents[i].title}</NavLink></li>)
+    lis.push(<li key= {contents[i].id}><NavLink to={'/topics/'+contents[i].id}>{contents[i].title}</NavLink></li>)
   }
   return(
     <div>
@@ -73,7 +74,9 @@ function Topics(){
         {lis}
       </ul>
       <Outlet/>
-      
+      <Routes>
+        <Route path=":topic_id" element={<Topic />}/>
+      </Routes>
     </div>
     
   )
@@ -91,9 +94,7 @@ function App(){
       </ul>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/topics" element={<Topics />} >
-          <Route path="/topics/:topic_id" element={<Topic />}/>
-        </Route>
+        <Route path="/topics/*" element={<Topics />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
