@@ -4,9 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { render } from "react-dom";
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
-  Route
+  Route,
+  Outlet, 
+  Link,
+  NavLink
 } from "react-router-dom";
 
 function Home(){
@@ -42,9 +45,9 @@ function App(){
     <div>
       <h1>React Router DOM example</h1>
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/topics">Topics</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/topics">Topics</NavLink></li>
+        <li><NavLink to="/contact">Contact</NavLink></li>
       </ul>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -57,7 +60,7 @@ function App(){
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter><App /></BrowserRouter>
+    <HashRouter><App /></HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
